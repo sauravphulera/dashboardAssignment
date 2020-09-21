@@ -90,7 +90,7 @@
                   >
                     <span
                       class="material-icons-outlined"
-                      ng-style="{color:sideBarBtns.isDashClicked? 'blue':'darkgray'}"
+                      ng-style="{color:sideBarBtns.isDashClicked? '#3bb9eb':'darkgray'}"
                     >
                       dashboard
                     </span>
@@ -115,7 +115,7 @@
                     </span>
                     <span
                       class="material-icons"
-                      style="font-size: 16px; color: blue"
+                      style="font-size: 16px; color: #3bb9eb"
                       ng-if="sideBarBtns.isDashClicked"
                     >
                       arrow_drop_down
@@ -124,7 +124,7 @@
                 </div>
                 <!-- expanded content  -->
                 <div
-                  style="margin-left: 36px; font-size: 12px"
+                  style="margin-left: 36px; font-size: 12px; margin-top: 13px"
                   ng-if="sideBarBtns.isDashClicked"
                 >
                   <div>
@@ -149,7 +149,7 @@
                 >
                   <span
                     class="material-icons-outlined"
-                    ng-style="{color:sideBarBtns.isCalendarClicked? 'blue':'darkgray'}"
+                    ng-style="{color:sideBarBtns.isCalendarClicked? '#3bb9eb':'darkgray'}"
                   >
                     calendar_today
                   </span>
@@ -170,28 +170,60 @@
                 >
                   <span
                     class="material-icons-outlined"
-                    ng-style="{color:sideBarBtns.isInboxClicked? 'blue':'darkgray'}"
+                    ng-style="{color:sideBarBtns.isInboxClicked? '#3bb9eb':'darkgray'}"
                   >
                     inbox
                   </span>
                   <div
                     class="dash--fonts"
-                    style="font-weight: 600; font-size: 12px; margin-left: 12px"
+                    style="
+                      font-weight: 600;
+                      font-size: 12px;
+                      margin-left: 12px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      width: 100%;
+                    "
                   >
-                    Inbox
+                    <div>Inbox</div>
+                    <div>
+                      <div>
+                        <span
+                          class="material-icons"
+                          style="
+                            font-size: 14px;
+                            display: inline-block;
+                            height: 8px;
+                          "
+                          ng-style="{color: !sideBarBtns.isInboxClicked? 'darkgray': '#3bb9eb'}"
+                        >
+                          arrow_drop_up
+                        </span>
+                      </div>
+                      <div>
+                        <span
+                          class="material-icons"
+                          style="font-size: 14px; display: inline-block"
+                          ng-style="{color: !sideBarBtns.isInboxClicked? 'darkgray': '#3bb9eb'}"
+                        >
+                          arrow_drop_down
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               <!-- Invoice -->
               <div style="margin-bottom: 1em">
-                <div class="dash--seperation-line"></div>
+                <div class="dash--seperation-line" style="height: 0.1px"></div>
                 <div
                   class="dash--sideBarBtns"
                   ng-click="handleDashClicked('isInVoiceClicked','sideBarBtns')"
                 >
                   <span
                     class="material-icons-outlined"
-                    ng-style="{color:sideBarBtns.isInVoiceClicked? 'blue':'darkgray'}"
+                    ng-style="{color:sideBarBtns.isInVoiceClicked? '#3bb9eb':'darkgray'}"
                   >
                     home_repair_service
                   </span>
@@ -212,7 +244,7 @@
                 >
                   <span
                     class="material-icons-outlined"
-                    ng-style="{color:sideBarBtns.isInLabClicked? 'blue':'darkgray'}"
+                    ng-style="{color:sideBarBtns.isInLabClicked? '#3bb9eb':'darkgray'}"
                   >
                     outdoor_grill
                   </span>
@@ -398,7 +430,7 @@
                 ></div>
                 <table style="width: 100%">
                   <tr>
-                    <th style="padding: 8px 0px 12.5px 22px;">PAGE NAME</th>
+                    <th style="padding: 8px 0px 12.5px 22px">PAGE NAME</th>
                     <th>VISITORS</th>
                     <!-- <th style="color: white"></th> -->
                     <th>UNIQUE PAGE VISITS</th>
@@ -416,8 +448,9 @@
                       >
                         {{page.pageName}}
                         <span
+
                           class="material-icons"
-                          style="color: darkgray; font-size: 20px"
+                          style="color: darkgray; font-size: 20px;cursor: pointer;"
                         >
                           open_in_new
                         </span>
@@ -427,8 +460,11 @@
                     <td>{{page.visitors}}</td>
                     <td>{{page.uniqueVisitors}}</td>
                     <td>{{page.bounceRate}}</td>
-                    <td style="width: 20%;">
-                      <div id={{page.id}} style="height: 50px;width:calc(100% - 22px)"></div>
+                    <td style="width: 20%">
+                      <div
+                        id="{{page.id}}"
+                        style="height: 50px; width: calc(100% - 22px)"
+                      ></div>
                     </td>
                     <!-- <div class="dash--seperation-line"></div> -->
                   </tr>
@@ -446,16 +482,19 @@
                 ></div>
                 <table style="width: 100%" class="socialTraffic">
                   <tr>
-                    <th style="padding: 8px 0px 12.5px 22px;">NETWORK</th>
+                    <th style="padding: 8px 0px 12.5px 22px">NETWORK</th>
                     <th>VISITORS</th>
                     <th style="color: white">Progress bAR of traffic</th>
                   </tr>
                   <tr ng-repeat="traffic in socialTraffic">
-                    <td style="padding-left:22px">{{traffic.network}}</td>
+                    <td style="padding-left: 22px">{{traffic.network}}</td>
                     <td>{{traffic.visitors}}</td>
                     <td>
                       <div class="dash--progressbar">
-                        <div class="dash--progress-inner" ng-style="{width: traffic.value}"></div>
+                        <div
+                          class="dash--progress-inner"
+                          ng-style="{width: traffic.value}"
+                        ></div>
                       </div>
                     </td>
                   </tr>
