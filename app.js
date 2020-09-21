@@ -1,46 +1,14 @@
-// import * as dayjs from 'dayjs'
 (function (angular) {
-  "use strict";
+  ("use strict");
   var myApp = angular.module("Dashboard", []);
 
   myApp.controller("DashController", [
     "$scope",
     function ($scope) {
       $scope.spice = "very";
-      $scope.records = [
-        {
-          title: "REALTIME USERS",
-          value: "56",
-          rate: "+9.8%",
-          color: "green",
-          id: "usersContainer",
-          chartColor: "#1051e0",
-        },
-        {
-          title: "TOTAL VISITORS",
-          value: "54,598",
-          rate: "-11.9%",
-          color: "red",
-          id: "visitorsContainer",
-          chartColor: "#29a125",
-        },
-        {
-          title: "BOUNCE RATE",
-          value: "73.67%",
-          rate: "+12.2%",
-          color: "green",
-          id: "bounceContainer",
-          chartColor: "#784fc4",
-        },
-        {
-          title: "VISIT DURATION",
-          value: "1m 4s",
-          rate: "+19.6%",
-          color: "green",
-          id: "visitDurationContainer",
-          chartColor: "#e3c756",
-        },
-      ];
+      $scope.visitedPages = visitedPages;
+      $scope.records = records;
+      $scope.socialTraffic = socialTraffic;
       $scope.sideBarBtns = {
         isDashClicked: false,
         isCalendarClicked: false,
@@ -71,7 +39,6 @@
         ).daysInMonth();
         $scope.data = [];
         $scope.categories = [];
-        console.log($scope.numOfDays);
         for (let i = 1; i <= $scope.numOfDays; i++) {
           $scope.categories.push(i);
           $scope.data.push(
@@ -153,15 +120,21 @@
             paddingTop: 5,
           },
           formatter: function (d) {
-            const day =
-              this.x === 1
-                ? "1ST"
-                : this.x === 2
-                ? "2ND"
-                : this.x === 3
-                ? "3RD"
-                : `${this.x}TH`;
-            var rV = `<span style="color:gray;font-weight:600;line-height:1em">${day} ${$scope.selectedMonth} ${$scope.selectedYear}</span><br/>`;
+            const getNth = () => {
+              if (this.x > 3 && this.x < 21) return "TH";
+              switch (this.x % 10) {
+                case 1:
+                  return "ST";
+                case 2:
+                  return "ND";
+                case 3:
+                  return "RD";
+                default:
+                  return "TH";
+              }
+            };
+            const nth = getNth();
+            var rV = `<span style="color:gray;font-weight:600;line-height:1em">${this.x}${nth} ${$scope.selectedMonth} ${$scope.selectedYear}</span><br/>`;
             rV += '<span style="display:none">s</span>' + "<br/>";
             rV +=
               '<span style="color:' +
@@ -191,48 +164,53 @@
         ],
       });
       angular.element(document).ready(function () {
-        console.log("heya");
         for (let record of $scope.records) {
-          console.log(record);
-          let data = [];
-          for (let i = 0, t = 100; i < t - 80; i++) {
-            data.push(Math.round(Math.random() * t));
-          }
-          $scope.areaChart = Highcharts.chart(record.id, {
-            chart: {
-              type: "area",
-            },
-            title: {
-              text: "",
-            },
-            xAxis: {
-              visible: false,
-            },
-            yAxis: {
-              title: "",
-              visible: false,
-            },
-            plotOptions: {
-              series: {
-                fillOpacity: 0.1,
-              },
-              area: {
-                marker: {
-                  enabled: false,
-                },
-              },
-            },
-            series: [
-              {
-                name: record.name,
-                showInLegend: false,
-                color: record.chartColor,
-                data: data,
-              },
-            ],
-          });
+          plotAreaChart($scope, record);
+        }
+        for (let visitInfo of $scope.visitedPages) {
+          plotAreaChart($scope, visitInfo);
         }
       });
     },
   ]);
 })(window.angular);
+function plotAreaChart($scope, record) {
+  let data = [];
+  for (let i = 0, t = 100; i < t - 80; i++) {
+    data.push(Math.round(Math.random() * t + 100));
+  }
+  $scope.areaChart = Highcharts.chart(record.id, {
+    chart: {
+      type: "area",
+    },
+    title: {
+      text: "",
+    },
+    xAxis: {
+      visible: false,
+    },
+    yAxis: {
+      title: "",
+      visible: false,
+    },
+    plotOptions: {
+      series: {
+        fillOpacity: 0.1,
+      },
+      area: {
+        marker: {
+          enabled: false,
+        },
+      },
+    },
+    series: [
+      {
+        name: record.name,
+        showInLegend: false,
+        color: record.chartColor,
+        data: data,
+      },
+    ],
+  });
+}
+

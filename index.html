@@ -23,6 +23,7 @@
     <script src="./app.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.36/dayjs.min.js"></script>
+    <script src="./data.js"></script>
   </head>
   <body ng-app="Dashboard" style="margin: 0; background: #fafafa">
     <!-- cntroller -->
@@ -384,8 +385,81 @@
                 justify-content: space-between;
               "
             >
-              <div class="bottom-left shadow"></div>
-              <div class="bottom-right shadow"></div>
+              <div class="bottom-left shadow">
+                <div class="upper-cards--top-content">
+                  <div class="dash--fonts" style="font-weight: 600">
+                    Most Visited Pages
+                  </div>
+                </div>
+                <div
+                  class="dash--seperation-line"
+                  style="margin: 0 0.5em 0.5em 0"
+                ></div>
+                <table style="width: 100%">
+                  <tr>
+                    <th style="padding: 8px 0px 12.5px 22px;">PAGE NAME</th>
+                    <th>VISITORS</th>
+                    <!-- <th style="color: white"></th> -->
+                    <th>UNIQUE PAGE VISITS</th>
+                    <th>BOUNCE RATE</th>
+                    <th style="color: white">Graph OF VISITED</th>
+                  </tr>
+                  <tr ng-repeat="page in visitedPages">
+                    <td style="padding: 0 22px">
+                      <div
+                        style="
+                          display: flex;
+                          align-items: center;
+                          justify-content: space-between;
+                        "
+                      >
+                        {{page.pageName}}
+                        <span
+                          class="material-icons"
+                          style="color: darkgray; font-size: 20px"
+                        >
+                          open_in_new
+                        </span>
+                      </div>
+                    </td>
+                    <!-- <td></td> -->
+                    <td>{{page.visitors}}</td>
+                    <td>{{page.uniqueVisitors}}</td>
+                    <td>{{page.bounceRate}}</td>
+                    <td style="width: 20%;">
+                      <div id={{page.id}} style="height: 50px;width:calc(100% - 22px)"></div>
+                    </td>
+                    <!-- <div class="dash--seperation-line"></div> -->
+                  </tr>
+                </table>
+              </div>
+              <div class="bottom-right shadow">
+                <div class="upper-cards--top-content">
+                  <div class="dash--fonts" style="font-weight: 600">
+                    Social Media Traffic
+                  </div>
+                </div>
+                <div
+                  class="dash--seperation-line"
+                  style="margin: 0 0.5em 0.5em 0"
+                ></div>
+                <table style="width: 100%" class="socialTraffic">
+                  <tr>
+                    <th style="padding: 8px 0px 12.5px 22px;">NETWORK</th>
+                    <th>VISITORS</th>
+                    <th style="color: white">Progress bAR of traffic</th>
+                  </tr>
+                  <tr ng-repeat="traffic in socialTraffic">
+                    <td style="padding-left:22px">{{traffic.network}}</td>
+                    <td>{{traffic.visitors}}</td>
+                    <td>
+                      <div class="dash--progressbar">
+                        <div class="dash--progress-inner" ng-style="{width: traffic.value}"></div>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
           <!-- end  main -->
