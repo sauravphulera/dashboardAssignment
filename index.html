@@ -24,10 +24,11 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.36/dayjs.min.js"></script>
     <script src="./data.js"></script>
+    <script src="./helper.js"></script>
   </head>
   <body ng-app="Dashboard" style="margin: 0; background: #fafafa">
     <!-- cntroller -->
-    <div ng-controller="DashController">
+    <div ng-controller="DashBoardController">
       <div class="dash-container">
         <div style="display: flex; margin-bottom: 1px">
           <div class="dash--home-card shadow">
@@ -294,7 +295,7 @@
                 </div>
                 <div>
                   <select
-                    ng-change="updateGraph()"
+                    ng-change="updateColumnChart()"
                     ng-model="selectedMonth"
                     name="months"
                     class="language-selector"
@@ -306,7 +307,7 @@
                   </select>
                   <select
                     ng-model="selectedYear"
-                    ng-change="updateGraph()"
+                    ng-change="updateColumnChart()"
                     name="months"
                     class="language-selector"
                     style="width: 74px; padding: 7px 12px; margin-left: 5px"

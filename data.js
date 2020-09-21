@@ -90,3 +90,31 @@ const socialTraffic = [
     value: '13%',
   },
 ];
+const monthsArr = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+const yearsArr = [
+  "2018",
+  "2019",
+  "2020",
+  "2017",
+  "2016",
+  "2015",
+  "2014",
+  "2013",
+  "2012",
+  "2011",
+  "2010",
+];

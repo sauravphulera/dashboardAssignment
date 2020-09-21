@@ -2,13 +2,22 @@
   ("use strict");
   var myApp = angular.module("Dashboard", []);
 
-  myApp.controller("DashController", [
+  myApp.controller("DashBoardController", [
     "$scope",
     function ($scope) {
-      $scope.spice = "very";
+      /** visited pages */
       $scope.visitedPages = visitedPages;
+
+      /** middle cards info */
       $scope.records = records;
+
+      /** social traffic info */
       $scope.socialTraffic = socialTraffic;
+
+      /** helper function to plot area chart */
+      $scope.plotAreaChart = plotAreaChart;
+
+      /** local var to store if side btns are clicke or not */
       $scope.sideBarBtns = {
         isDashClicked: false,
         isCalendarClicked: false,
@@ -17,22 +26,57 @@
         isLabClicked: false,
       };
 
-      ($scope.selectedMonth = "December"),
-        ($scope.selectedYear = "2018"),
-        ($scope.categories = []);
+      /** track selected month ,year*/
+      $scope.selectedMonth = "December";
+      $scope.selectedYear = "2018";
+
+      /** x asis for column chart */
+      $scope.categories = [];
+
+      /** chart data of column chart*/
       $scope.data = [];
+
+      /** number of days in selected month */
       $scope.numOfDays = 31;
+
+      /** max value for graph data */
       $scope.max = 9000;
+
+      /** min value for graph data */
       $scope.min = 1000;
 
-      for (let i = 1; i <= $scope.numOfDays; i++) {
-        $scope.categories.push(i);
-        $scope.data.push(
-          Math.random() * ($scope.max - $scope.min) + $scope.min
-        );
-      }
+      /** reference for updating column chart func */
+      // $scope.updateColumnChart = updateColumnChart;
 
-      $scope.updateGraph = () => {
+      /** months array */
+      $scope.months = monthsArr;
+
+      /**years array */
+      $scope.years = yearsArr;
+
+      /** plot chart when content is loaded */
+      angular.element(document).ready(function () {
+        /**plot middle card charts */
+        for (let record of $scope.records) {
+          $scope.plotAreaChart($scope, record);
+        }
+
+        /** plot bottom card charts */
+        for (let visitInfo of $scope.visitedPages) {
+          $scope.plotAreaChart($scope, visitInfo);
+        }
+
+        $scope.updateColumnChart();
+      });
+
+      $scope.handleDashClicked = (key, handlerObj) => {
+        Object.keys($scope[handlerObj]).forEach((key) => {
+          if (key !== "isDashClicked") $scope[handlerObj][key] = false;
+        });
+        $scope[handlerObj][key] = !$scope.sideBarBtns[key];
+      };
+
+      $scope.updateColumnChart = () => {
         let index = $scope.months.indexOf($scope.selectedMonth);
         $scope.numOfDays = dayjs(
           `${$scope.selectedYear}-${index + 1}-01`
@@ -51,6 +95,12 @@
           },
           series: [
             {
+              states: {
+                hover: {
+                  color: "#2454a3",
+                },
+              },
+              pointWidth: 14,
               color: "#1051e0",
               showInLegend: false,
               name: "Visitors",
@@ -60,40 +110,7 @@
         });
       };
 
-      $scope.months = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-      ];
-      $scope.years = [
-        "2018",
-        "2019",
-        "2020",
-        "2017",
-        "2016",
-        "2015",
-        "2014",
-        "2013",
-        "2012",
-        "2011",
-        "2010",
-      ];
-      $scope.handleDashClicked = (key, handlerObj) => {
-        Object.keys($scope[handlerObj]).forEach((key) => {
-          if (key !== "isDashClicked") $scope[handlerObj][key] = false;
-        });
-        $scope[handlerObj][key] = !$scope.sideBarBtns[key];
-      };
-
+      /** configure column chart */
       $scope.chart = Highcharts.chart("container", {
         title: {
           text: "",
@@ -163,54 +180,6 @@
           },
         ],
       });
-      angular.element(document).ready(function () {
-        for (let record of $scope.records) {
-          plotAreaChart($scope, record);
-        }
-        for (let visitInfo of $scope.visitedPages) {
-          plotAreaChart($scope, visitInfo);
-        }
-      });
     },
   ]);
 })(window.angular);
-function plotAreaChart($scope, record) {
-  let data = [];
-  for (let i = 0, t = 100; i < t - 80; i++) {
-    data.push(Math.round(Math.random() * t + 100));
-  }
-  $scope.areaChart = Highcharts.chart(record.id, {
-    chart: {
-      type: "area",
-    },
-    title: {
-      text: "",
-    },
-    xAxis: {
-      visible: false,
-    },
-    yAxis: {
-      title: "",
-      visible: false,
-    },
-    plotOptions: {
-      series: {
-        fillOpacity: 0.1,
-      },
-      area: {
-        marker: {
-          enabled: false,
-        },
-      },
-    },
-    series: [
-      {
-        name: record.name,
-        showInLegend: false,
-        color: record.chartColor,
-        data: data,
-      },
-    ],
-  });
-}
-
