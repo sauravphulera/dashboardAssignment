@@ -1,6 +1,6 @@
 # dashboard     
 The code is to create replica of following page    
-![alt text](dashboard.png)
+![alt text](dashboard-actual.png)
 
 steps to run     
 git clone    
