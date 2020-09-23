@@ -64,7 +64,7 @@ const records = [
     rate: "+19.6%",
     color: "green",
     id: "visitDurationContainer",
-    chartColor: "#e3c756",
+    chartColor: "#facf5c",
   },
 ];
 

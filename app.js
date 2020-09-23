@@ -97,11 +97,11 @@
             {
               states: {
                 hover: {
-                  color: "#2454a3",
+                  color: "#1554b0",
                 },
               },
               pointWidth: 14,
-              color: "#1051e0",
+              color: "#1869d8",
               showInLegend: false,
               name: "Visitors",
               data: $scope.data,
@@ -123,19 +123,21 @@
         },
         yAxis: {
           title: "",
+          tickInterval: 3000,
           opposite: true,
-          offset: 12,
+          offset: 16,
           labels: {
             align: "right",
             x: 0,
             y: 22,
-            // offset: 22,
+            // step: 3,
             style: {
               fontSize: '10px',
             },
-            formatter: function () {
+            formatter: function (step) {
               if (this.value > 0) {
-                return '   '+this.value/1000 + 'K';
+                // this.value += 
+                return (this.value/1000) + 'K';
               }
             },
           },

@@ -31,6 +31,9 @@ const plotAreaChart = ($scope, record) => {
           },
         },
       },
+      tooltip: {
+        enabled: false,
+      },
       series: [
         {
           name: record.name,
