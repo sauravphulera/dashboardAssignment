@@ -118,9 +118,27 @@
         chart: {
           type: "column",
         },
+        credits: {
+          enabled: false,
+        },
         yAxis: {
           title: "",
           opposite: true,
+          offset: 12,
+          labels: {
+            align: "right",
+            x: 0,
+            y: 22,
+            // offset: 22,
+            style: {
+              fontSize: '10px',
+            },
+            formatter: function () {
+              if (this.value > 0) {
+                return '   '+this.value/1000 + 'K';
+              }
+            },
+          },
         },
         xAxis: {
           categories: $scope.categories,

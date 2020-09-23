@@ -32,7 +32,10 @@
       <div class="dash-container">
         <div style="display: flex; margin-bottom: 1px">
           <div class="dash--home-card shadow">
-            <span class="material-icons-outlined" style="color: darkgray">
+            <span
+              class="material-icons-outlined"
+              style="color: darkgray; font-size: 30px"
+            >
               home
             </span>
           </div>
@@ -124,7 +127,7 @@
                 </div>
                 <!-- expanded content  -->
                 <div
-                  style="margin-left: 36px; font-size: 12px; margin-top: 13px"
+                  style="margin-left: 37px; font-size: 12px; margin-top: 13px"
                   ng-if="sideBarBtns.isDashClicked"
                 >
                   <div>
@@ -163,7 +166,7 @@
               </div>
               <!-- Inbox -->
               <div style="margin-bottom: 1em">
-                <div class="dash--seperation-line"></div>
+                <div class="dash--seperation-line" style="height: 0.1px;"></div>
                 <div
                   class="dash--sideBarBtns"
                   ng-click="handleDashClicked('isInboxClicked','sideBarBtns')"
@@ -216,7 +219,7 @@
               </div>
               <!-- Invoice -->
               <div style="margin-bottom: 1em">
-                <div class="dash--seperation-line" style="height: 0.1px"></div>
+                <div class="dash--seperation-line" style="height: 1.1px"></div>
                 <div
                   class="dash--sideBarBtns"
                   ng-click="handleDashClicked('isInVoiceClicked','sideBarBtns')"
@@ -319,7 +322,7 @@
           <!-- dash main contents -->
           <div class="dash--content">
             <!-- upper card -->
-            <div style="background: white; height: 320px" class="shadow">
+            <div style="background: white; height: 358px" class="shadow">
               <!-- upper content -->
               <div class="upper-cards--top-content">
                 <div class="dash--fonts" style="font-weight: 600">
@@ -331,7 +334,7 @@
                     ng-model="selectedMonth"
                     name="months"
                     class="language-selector"
-                    style="width: 90px; padding: 7px 12px"
+                    style="width: 90px; padding: 10px 12px"
                   >
                     <option ng-value="month" ng-repeat="month in months">
                       {{month}}
@@ -342,7 +345,7 @@
                     ng-change="updateColumnChart()"
                     name="months"
                     class="language-selector"
-                    style="width: 74px; padding: 7px 12px; margin-left: 5px"
+                    style="width: 78px; padding: 10px 12px; margin-left: 5px"
                   >
                     <option ng-value="year" ng-repeat="year in years">
                       {{year}}
@@ -354,7 +357,7 @@
               <div>
                 <div
                   id="container"
-                  style="height: 230px; padding: 0 32px"
+                  style="height: 264px; padding: 0 26px"
                 ></div>
               </div>
             </div>
@@ -401,8 +404,8 @@
                   id="{{record.id}}"
                   style="
                     height: 200px;
-                    padding: 0 12px 12px 12px;
-                    width: calc(100% - 24px);
+                    padding: 0 24px 12px 24px;
+                    width: calc(100% - 48px);
                     overflow: hidden;
                   "
                 ></div>
@@ -430,7 +433,7 @@
                 ></div>
                 <table style="width: 100%">
                   <tr>
-                    <th style="padding: 8px 0px 12.5px 22px">PAGE NAME</th>
+                    <th style="padding: 9.5px 0px 13px 34px">PAGE NAME</th>
                     <th>VISITORS</th>
                     <!-- <th style="color: white"></th> -->
                     <th>UNIQUE PAGE VISITS</th>
@@ -438,7 +441,7 @@
                     <th style="color: white">Graph OF VISITED</th>
                   </tr>
                   <tr ng-repeat="page in visitedPages">
-                    <td style="padding: 0 22px">
+                    <td style="padding: 0 34px">
                       <div
                         style="
                           display: flex;
@@ -448,9 +451,12 @@
                       >
                         {{page.pageName}}
                         <span
-
                           class="material-icons"
-                          style="color: darkgray; font-size: 20px;cursor: pointer;"
+                          style="
+                            color: darkgray;
+                            font-size: 20px;
+                            cursor: pointer;
+                          "
                         >
                           open_in_new
                         </span>
@@ -463,7 +469,7 @@
                     <td style="width: 20%">
                       <div
                         id="{{page.id}}"
-                        style="height: 50px; width: calc(100% - 22px)"
+                        style="height: 56px; width: calc(100% - 22px)"
                       ></div>
                     </td>
                     <!-- <div class="dash--seperation-line"></div> -->
@@ -482,12 +488,12 @@
                 ></div>
                 <table style="width: 100%" class="socialTraffic">
                   <tr>
-                    <th style="padding: 8px 0px 12.5px 22px">NETWORK</th>
+                    <th style="padding: 9.5px 0px 13px 34px">NETWORK</th>
                     <th>VISITORS</th>
                     <th style="color: white">Progress bAR of traffic</th>
                   </tr>
                   <tr ng-repeat="traffic in socialTraffic">
-                    <td style="padding-left: 22px">{{traffic.network}}</td>
+                    <td style="padding-left: 34px">{{traffic.network}}</td>
                     <td>{{traffic.visitors}}</td>
                     <td>
                       <div class="dash--progressbar">
