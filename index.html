@@ -166,7 +166,7 @@
               </div>
               <!-- Inbox -->
               <div style="margin-bottom: 1em">
-                <div class="dash--seperation-line" style="height: 0.1px;"></div>
+                <div class="dash--seperation-line" style="height: 0.1px"></div>
                 <div
                   class="dash--sideBarBtns"
                   ng-click="handleDashClicked('isInboxClicked','sideBarBtns')"
@@ -265,7 +265,7 @@
             <div style="padding: 0 12%">
               <div class="dash--seperation-line"></div>
 
-              <div class="expanded-font" style="font-size: 12px">
+              <div class="expanded-font" style="font-size: 11px">
                 RECENTLY VIEWED
               </div>
               <div>
@@ -383,14 +383,20 @@
                 </div>
                 <div
                   ng-style="{color: record.color}"
-                  style="color: green; font-size: 14px; font-weight: 600"
+                  style="
+                    color: green;
+                    font-size: 14px;
+                    font-weight: 600;
+                    display: flex;
+                    align-items: center;
+                  "
                 >
                   {{record.rate}}
                   <span
                     class="material-icons"
                     ng-Style="{color: record.color, border-color: record.color}"
                     style="
-                      font-size: 12px;
+                      font-size: 15px;
                       font-weight: 900;
                       border: 2px solid;
                       margin-left: 0.5em;
